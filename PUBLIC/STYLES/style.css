@@ -1,92 +1,35 @@
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-  position: relative;
-  min-height: 100%;
+  
+/* we push the content down some and clean up the edges on mobile devices */
+@media (max-width: 767px) {
+    .content {
+      padding: 15px;
+      margin-top: 100px;
+    }
 }
-body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
-}
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  /* Set the fixed height of the footer here */
-  height: 60px;
-  /*background-color: #f5f5f5;*/
-}
-
-
-/* Custom page CSS
--------------------------------------------------- */
-/* Not required for template or sticky footer method. */
-
-body > .container {
-  padding: 60px 15px 0;
-}
-.container .text-muted {
-  margin: 20px 0;
-}
-
-.footer > .container {
-  padding-right: 15px;
-  padding-left: 15px;
-}
-
-code {
-  font-size: 80%;
-}
-
-.list-group
-{
-  /*max-height:680px;*/
-  overflow-y:auto;
-}
-.panel-heading
-{
-  text-align:center;
-}
-.ticketform
-{
-  position:absolute;
-  right:5px;
-  top:10px;
-}
-.ticket
-{
-  min-height:82px;
-}
-.addticket
-{
-  position:absolute;
-  left:20px;
-  top:4px;
-}
-
-.dropdown-menu{
-  min-width: 0px;
-}
-.avatar-left{
-  display: inline-block;
-  text-align: right;
-  max-height: 200px;
-}
-
-.avatar-header{
-  height: 50px;
-  padding: 9px;
  
-
-}
-@media screen and (min-width: 200px) and (max-width: 770px) {
-  .navbar-nav{
-      margin-left: 10%;
-      text-align: center;
-      display: block;
-      font-size: 2rem;
-  }
-  .navbar-left{
-      font-size: 3rem;
-  }
+/* When we were on larger screen sizes we can show our vertical menu bar */
+@media (min-width: 768px) {
+    /* clean up some of the default Bootstrap styles for panels in the menu */
+    #menu-bar .panel {
+      margin-bottom: 0;
+      border: none;
+      border-radius: 0;
+      -webkit-box-shadow: none;
+      -box-shadow: none;
+    }
+ 
+    #navbar {
+      float: left;
+      width: 300px; /* You can adjust the width to your liking, just remember to also adjust the content margin below accordingly */
+      height: 100%;
+    }
+ 
+    .content {
+      margin-left: 300px; /* If you adjusted the width above you will need to adjust this as well */
+      min-height: 100%;
+    }
+ 
+    .container {
+      margin-left: 25px; /* We will add a little cushion to our content between the menu bar */
+    }
 }

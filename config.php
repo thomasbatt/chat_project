@@ -1,4 +1,13 @@
 <?php
+//-------------------- 3WA HOME --------------------
+$config = [
+	'host' => 'localhost',
+	'port' => '3306',
+	'login' => 'tchat',
+	'password' => 'troiswa',
+	'bdd' => 'tchat',
+];
+
 //-------------------- HERVE HOME --------------------
 
 // $config = array(
@@ -11,11 +20,11 @@
 
 //-------------------- 3WA HOME --------------------
 
-$config = array(
-	'host' => 'localhost',
-	'port' => '3306',
-	'login' => 'root',
-	'password' => 'troiswa',
-	'bdd' => 'ticket',
-);
+//$config = [
+//	'host' => 'localhost',
+//	'port' => '3306',
+//	'login' => 'root',
+//	'password' => 'troiswa',
+//	'bdd' => 'ticket',
+//];
 ?>
