@@ -31,7 +31,6 @@ class UserManager
 	{
 		$user = new User();
 		$user->setLogin($login);
-		$user->setAdmin(false);
 		$user->initPassword($pass1, $pass2);
 		$login = mysqli_real_escape_string($this->db, $user->getLogin());
 		$hash = mysqli_real_escape_string($this->db, $user->getHash());

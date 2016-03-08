@@ -5,7 +5,7 @@ session_start();
 // var_dump($_GET);
 // var_dump($_SESSION);
 
-$page = "profil";
+$page = 'home';
 
 require('APPS/listeErrors.php');
 require('config.php');

@@ -21,10 +21,10 @@
 //-------------------- 3WA HOME --------------------
 
 $config = [
-	'host' => '192.168.1.65',
+	'host' => '192.168.1.7',
 	'port' => '3306',
-	'login' => 'tchat_project',
-	'password' => 'troiswa',
-	'bdd' => 'tchat_project',
+	'login' => 'thomas',
+	'password' => 'thomas',
+	'bdd' => 'tchat_object',
 ];
 ?>
