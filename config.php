@@ -1,12 +1,12 @@
 <?php
-//-------------------- 3WA HOME --------------------
-$config = [
-	'host' => 'localhost',
-	'port' => '3306',
-	'login' => 'tchat',
-	'password' => 'troiswa',
-	'bdd' => 'tchat',
-];
+//-------------------- THOMAS HOME --------------------
+// $config = [
+// 	'host' => 'localhost',
+// 	'port' => '3306',
+// 	'login' => 'tchat',
+// 	'password' => 'troiswa',
+// 	'bdd' => 'tchat',
+// ];
 
 //-------------------- HERVE HOME --------------------
 
@@ -20,11 +20,11 @@ $config = [
 
 //-------------------- 3WA HOME --------------------
 
-//$config = [
-//	'host' => 'localhost',
-//	'port' => '3306',
-//	'login' => 'root',
-//	'password' => 'troiswa',
-//	'bdd' => 'ticket',
-//];
+$config = [
+	'host' => '192.168.1.65',
+	'port' => '3306',
+	'login' => 'tchat_project',
+	'password' => 'troiswa',
+	'bdd' => 'tchat_project',
+];
 ?>
