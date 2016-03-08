@@ -23,8 +23,8 @@
 $config = [
 	'host' => '192.168.1.7',
 	'port' => '3306',
-	'login' => 'thomas',
-	'password' => 'thomas',
+	'login' => 'tchat_object',
+	'password' => 'troiswa',
 	'bdd' => 'tchat_object',
 ];
 ?>

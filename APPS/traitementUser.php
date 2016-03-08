@@ -40,11 +40,12 @@ if (isset($_POST['action']))
 			$usermanager = new UserManager($db);
 			try
 			{
-				$user = $usermanager->getByLogin($_POST['login']);
+				$manager = new UserManager($db);
+				$user = $manager->getByLogin($_POST['login']);
 				$user->verifPassword($_POST['password']);
 				$_SESSION['id'] = $user->getId();
 				$_SESSION['login'] = $user->getLogin();
-				header('Location: message');
+				header('Location: tchat');
 				exit;
 			}
 			catch (Exception $e)
