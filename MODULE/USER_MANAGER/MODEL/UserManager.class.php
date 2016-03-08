@@ -17,12 +17,12 @@ class UserManager
 		$this->db = $db;
 	}
 
-/******************************** ALL USER BY LOGIN *****************************************
+/******************************** ALL INFO USER BY LOGIN ************************************
 ********************************************************************************************/
 	public function getByLogin($login)
 	{
 		$login = mysqli_real_escape_string($this->db, $login);
-		$query = "SELECT * FROM user WHERE login='".$login."'";
+		$query = "SELECT * FROM user WHERE login_user='".$login."'";
 		$res = mysqli_query($this->db, $query);
 		if ($res)
 		{

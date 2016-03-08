@@ -3,7 +3,10 @@
 		'login' => '',
 		'password' => '',
 		'loginExiste' => '',
-		'Create' => ''
+		'Create' => '',
+		'connectionLogin' => '',
+		'connectionPassword' => '',
+		'connection' => ''
 	);
 	
 	if (isset($_POST['action'])) 
@@ -25,9 +28,32 @@
 					$errors['loginExiste'] = $e->getMessage();
 				}
 			}
-
+		}
+		elseif ($action == 'login') 
+		{
+			if (isset($_POST['login'], $_POST['password'])) 
+			{
+				require('MODULE/USER/MODEL/User.class.php');
+				require('MODULE/USER_MANAGER/MODEL/UserManager.class.php');
+				$userManager = new UserManager($bdd);
+				try
+				{
+					$user = $userManager->getByLogin($_POST['login']);
+				}
+				catch(Exception $e)
+				{
+					$errors['connect'] = $e->getMessage();
+				}
+				var_dump($user);
+				$testreturn = $user->verifPassword($_POST['password']);
+				$testget = $user->getHash();
+				var_dump($testget);
+				var_dump($testreturn);
+			}
 		}		
 	}
+
+
 	// require('MODULE/USER/MODEL/User.class.php');
 	// require('MODULE/USER_MANAGER/MODEL/UserManager.class.php');
 	// $userManager = new UserManager($bdd);
