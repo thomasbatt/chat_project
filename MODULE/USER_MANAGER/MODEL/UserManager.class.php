@@ -47,11 +47,12 @@ class UserManager
 	public function getLoginExiste($login)
 	{
 		$login = mysqli_real_escape_string($this->db, $login);
-		$query = "SELECT id_user FROM user WHERE login='".$login."'";
+		$query = "SELECT id_user FROM user WHERE login_user='".$login."'";
 		$res = mysqli_query($this->db, $query);
 		if ($res)
 		{
-			if ($res->fetch_row() != NULL) 
+			$idUser = mysqli_fetch_row($res);
+			if ($idUser != NULL) 
 			{
 				return TRUE;
 			}
@@ -95,7 +96,7 @@ class UserManager
 		if ($nombreErrors == 0) {
 			try
 			{
-				$testLogin = $UserManager->getLoginExiste($login);
+				$testLogin = $this->getLoginExiste($login);
 			}
 			catch(Exception $e)
 			{
@@ -105,7 +106,7 @@ class UserManager
 			{
 				$loginVerif = mysqli_real_escape_string($this->db, $user->getLogin());
 				$hashVerif = mysqli_real_escape_string($this->db, $user->getHash());
-				$query = "INSERT INTO `user`(`login_user`, `hash-user`) VALUES ('".$loginVerif."','".$hashVerif."')";
+				$query = "INSERT INTO `user`(`login_user`, `hash_user`) VALUES ('".$loginVerif."','".$hashVerif."')";
 				
 				$res = mysqli_query($this->db, $query);
 				if ($res)

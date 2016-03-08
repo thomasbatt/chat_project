@@ -112,9 +112,5 @@ class User {
 			throw new Exception("Les deux mots de passes ne correspondent");
 		}
 	}
-	else
-	{
-		throw new Exception("Impossible d'initialiser un mot de passe une seconde fois");
-	}
 }
 ?>
