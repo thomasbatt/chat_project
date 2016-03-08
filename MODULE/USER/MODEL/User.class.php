@@ -21,6 +21,16 @@ class User {
 		return $this->login;
 	}
 
+	public function getDate()
+	{
+		return $this->date;
+	}
+
+	public function getHash()
+	{
+		return $this->hash;
+	}
+
 	public function getCreateDate() {
 		return $this->createDate;
 	}
@@ -46,36 +56,55 @@ class User {
 	}
 
 	// --------------------Liste des méthodes "autres"---------------------
+
+	// --------------------verifier password ?---------------------
 	public function verifPassword($password)
 	{
-		return password_verify($password, $this->hash);
+		if (!password_verify($password, $this->hash))
+			throw new Exception("Mot de passe incorrect");
 	}
 
+	// --------------------modifier password ?---------------------
 	public function editPassword($oldPassword, $newPassword1, $newPassword2)
 	{
-		if ($newPassword1 == $newPassword2) 
+		if ($newPassword1 === $newPassword2)
 		{
-			if (strlen($newPassword1) > 5) 
+			$newPassword = $newPassword1;
+			if (strlen($newPassword) > 5)
 			{
-				if ($this->verifPassword($newPassword1)) 
+				if ($this->verifPassword($oldPassword))
 				{
-					$this->hash = password_hash($newPassword1, PASSWORD_BCRYPT, ["cost"=>12]);
+					$this->hash = password_hash($newPassword, PASSWORD_BCRYPT, ["cost"=>12]);
 				}
+				else
+					throw new Exception("Ancien mot de passe incorrect");
 			}
+			else
+				throw new Exception("Mot de passe est trop court (< 6 caractères)");
 		}
+		else
+			throw new Exception("Les deux mots de passes ne correspondent");
 	}
 
 	public function initPassword($newPassword1, $newPassword2)
 	{
-		if ($this->hash == NULL) {
-			if ($newPassword1 == $newPassword2) 
+		if ($this->hash == null)
+		{
+			if ($newPassword1 === $newPassword2)
 			{
-				if (strlen($newPassword1) > 5) 
+				$newPassword = $newPassword1;
+				if (strlen($newPassword) > 5)
 				{
-					$this->hash = password_hash($newPassword1, PASSWORD_BCRYPT, ["cost"=>12]);
+					$this->hash = password_hash($newPassword, PASSWORD_BCRYPT, ["cost"=>12]);
 				}
+				else
+					throw new Exception("Mot de passe est trop court (< 6 caractères)");
 			}
+			else
+				throw new Exception("Les deux mots de passes ne correspondent");
 		}
+		else
+			throw new Exception("Impossible d'initialiser un mot de passe une seconde fois");
 	}
 }
 
@@ -88,11 +117,11 @@ class User {
 // --------------------Un objet est une instance d'une classe--------------
 // ------------------------------------------------------------------------
 
-$user = new User();
-$user->setLogin("toto");
-$user->initPassword("password", "password");
+// $user = new User();
+// $user->setLogin("toto");
+// $user->initPassword("password", "password");
 
-var_dump($user);
+// var_dump($user);
 
 
 ?>

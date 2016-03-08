@@ -10,8 +10,8 @@ $page = "profil";
 require('APPS/listeErrors.php');
 require('config.php');
 
-$bdd = mysqli_connect($config['host'], $config['login'], $config['password'], $config['bdd']);
-if (!$bdd) {
+$db = mysqli_connect($config['host'], $config['login'], $config['password'], $config['bdd']);
+if (!$db) {
 	$_GET['page'] = 'errors';
 }
 
@@ -38,10 +38,10 @@ if (isset($_GET['page']))
 }
 
 $traitement_action = array(
-	'register' => 'user',
-	'login' => 'user',
-	'logout' => 'user',
-	'information' => 'user',
+	'register' => 'User',
+	'login' => 'User',
+	'logout' => 'User',
+	'information' => 'User',
 );
 
 if (isset($_POST['action'])) 
