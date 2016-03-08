@@ -1,5 +1,10 @@
 <?php
 
+// var_dump($_GET);
+// var_dump($_POST);
+// var_dump($_SESSION);
+// exit;
+
 $errrors = [
 	'login' => '',
 	'password' => '',
@@ -37,15 +42,18 @@ if (isset($_POST['action']))
 		{
 			require('MODULE/USER/MODEL/User.class.php');
 			require('MODULE/USER/MODEL/UserManager.class.php');
-			$usermanager = new UserManager($db);
+			// $usermanager = new UserManager($db);
 			try
 			{
 				$manager = new UserManager($db);
 				$user = $manager->getByLogin($_POST['login']);
+				// var_dump($user);
 				$user->verifPassword($_POST['password']);
 				$_SESSION['id'] = $user->getId();
 				$_SESSION['login'] = $user->getLogin();
-				header('Location: tchat');
+				// var_dump($_SESSION);
+				// exit;
+				header('Location: message');
 				exit;
 			}
 			catch (Exception $e)
@@ -55,7 +63,7 @@ if (isset($_POST['action']))
 			}
 		}
 	}
-	else if ($action == 'message')
+	else if ($action == 'logout')
 	{
 		session_destroy();
 		$_SESSION = array();

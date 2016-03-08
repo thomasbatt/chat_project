@@ -1,18 +1,21 @@
 <?php
 session_start();
 
-// var_dump($_POST);
 // var_dump($_GET);
+// var_dump($_POST);
 // var_dump($_SESSION);
+// exit;
 
 $page = 'home';
 
 require('APPS/listeErrors.php');
 require('config.php');
 
-$db = mysqli_connect($config['host'], $config['login'], $config['password'], $config['bdd']);
+$db = @mysqli_connect($config['host'], $config['login'], $config['password'], $config['bdd']);
 if (!$db) {
-	$_GET['page'] = 'errors';
+	require('VIEWS/errors500.phtml');
+	die();
+	// $_GET['page'] = 'errors';
 }
 
 $access = ['home'];

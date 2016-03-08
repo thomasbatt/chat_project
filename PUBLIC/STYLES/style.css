@@ -44,24 +44,43 @@
       width: 100%;
     }
 }
+.site-title{
+  margin-bottom: 20px;
+}
+
+a:hover .site-title {
+  color: #fff;
+}
+
+.login-title{
+  font-size: 20px;
+  text-transform: uppercase;
+}
+
+.navbar-btn{
+  margin: 5px 0;
+  padding: 0 7px;
+}
 
 .container {
-    max-width: 750px;
+  max-width: 750px;
 }
 
 .nav {
-    margin-bottom: 30px;
+  margin-bottom: 30px;
 }
-.form-nav{
+.navbar-form{
   text-align: center;
   font-size: 10px;
+  margin-bottom: 20px;
 }
 
-.form-nav .form-control {
-    width: 80%;
-    height: 25px;
-    margin-left: 20px;
-    text-align: center;
+.navbar-form .form-control {
+  width: 80%;
+  height: 20px;
+  margin-bottom: 10px;
+  text-align: center;
+  padding: 0;
 }
 
 .form-nav .btn{
@@ -69,46 +88,49 @@
 }
 
 .navbar-header {
-    float: none;
-    text-align: center;
+  float: none;
+  text-align: center;
 }
 
 .navbar-collapse.collapse {
-    color: #EEEEEE;
+  color: #EEEEEE;
 }
 
 .navbar-fixed-top-left {
-    position: fixed;
-    right: 0px;
-    left: 0px;
-    z-index: 1030;
+  position: fixed;
+  right: 0px;
+  left: 0px;
+  z-index: 1030;
 }
 
 .navbar-fixed-top-right {
-    position: fixed;
-    right: 0px;
-    /*left: 0px;*/
-    z-index: 1030;
-    top: 0px;
+  position: fixed;
+  right: 0px;
+  /*left: 0px;*/
+  z-index: 1030;
+  top: 0px;
 }
 
 .container {
-    padding-top: 30px;
-    padding-left: 30px;
-    margin-right: auto;
-    margin-left: auto;
-    padding-right: 30px;
+  padding-top: 30px;
+  padding-left: 30px;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 30px;
 }
 
 a {
-    color: #EEEEEE;
-    text-decoration: none;
-    text-align: center;
+  color: #EEEEEE;
+  text-decoration: none;
+  text-align: center;
 }
 
 a:focus, a:hover {
-    /*color: #EEEEEE;*/
-    text-decoration: none;
+  color: #333;
+  text-decoration: none;
+  font-weight: 700;
 }
 
-
+.login-list{
+  text-transform: capitalize;    
+}
