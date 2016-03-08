@@ -16,6 +16,6 @@ $config = array(
 	'port' => '3306',
 	'login' => 'root',
 	'password' => 'troiswa',
-	'bdd' => 'ticket',
+	'bdd' => 'tchat_object',
 );
 ?>

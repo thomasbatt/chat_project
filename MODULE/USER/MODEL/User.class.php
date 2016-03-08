@@ -1,56 +1,69 @@
 <?php
-// PascalCase pour le nom des classes
-// camelCase pour le nom des variables
 class User {
-// ------------------------ Déclarer les propriétés-----------------------
+/********************************************************************************************
+********************************* PROPRIETE *************************************************
+********************************************************************************************/
 	private $id;
 	private $login;
 	private $hash;
 	private $createDate;
 	private $admin;
 	
-// ------------------------Déclarer les méthodes--------------------------
+/********************************************************************************************
+********************************* METHODE ***************************************************
+********************************************************************************************/
 
-	// --------------------Liste des getters------------------------------
+/******************************** GETTER ****************************************************
+********************************************************************************************/
 
 	public function getId() {
-		return $this->id; // On récupère la propriété id de $this
+		return $this->id; 
 	}
 
 	public function getLogin() {
 		return $this->login;
 	}
 
+	public function getHash() {
+		return $this->hash;
+	}
+
 	public function getCreateDate() {
 		return $this->createDate;
 	}
 
-	public function isAdmin() { // Un getter d'un booleen transforme le get en is
+	public function isAdmin() {
 		return $this->admin;
-	}
+	} 
 
-	// --------------------Liste des setters-------------------------------
+/******************************** SETTER ****************************************************
+********************************************************************************************/
+
 	public function setLogin($login) {
 		if (strlen($login) > 3 && strlen($login) < 31) {
 			$this->login = $login;
+		} else {
+			throw new Exception("Login incorrect (doit être compris entre 4 et 30 caractères)");
 		}
 	}
 
 	public function setAdmin($admin) {
-		// methode 1
 		if ($admin === true || $admin === false) {
 			$this->admin = $admin;
+		} else {
+			throw new Exception("Admin incorrect (doit être égal à true ou false)");
 		}
-		// ou methode 2
-		$this->admin = (bool)$admin; // (bool) permet de "caster" une variable en un type particulier, transformer n'importe quel type en booleen (ici)
 	}
 
-	// --------------------Liste des méthodes "autres"---------------------
+/******************************** PASSWORD VERIF ********************************************
+********************************************************************************************/
 	public function verifPassword($password)
 	{
 		return password_verify($password, $this->hash);
 	}
 
+/******************************** PASSWORD EDIT *********************************************
+********************************************************************************************/
 	public function editPassword($oldPassword, $newPassword1, $newPassword2)
 	{
 		if ($newPassword1 == $newPassword2) 
@@ -61,10 +74,24 @@ class User {
 				{
 					$this->hash = password_hash($newPassword1, PASSWORD_BCRYPT, ["cost"=>12]);
 				}
+				else
+				{
+					throw new Exception("Ancien mot de passe incorrect");
+				}
 			}
+			else
+			{
+				throw new Exception("Mot de passe est trop court (< 6 caractères)");
+			}
+		}
+		else
+		{
+			throw new Exception("Les deux mots de passes ne correspondent");
 		}
 	}
 
+/******************************** PASSWORD INIT *********************************************
+********************************************************************************************/
 	public function initPassword($newPassword1, $newPassword2)
 	{
 		if ($this->hash == NULL) {
@@ -75,24 +102,19 @@ class User {
 					$this->hash = password_hash($newPassword1, PASSWORD_BCRYPT, ["cost"=>12]);
 				}
 			}
+			else
+			{
+				throw new Exception("Mot de passe est trop court (< 6 caractères)");
+			}
+		}
+		else
+		{
+			throw new Exception("Les deux mots de passes ne correspondent");
 		}
 	}
+	else
+	{
+		throw new Exception("Impossible d'initialiser un mot de passe une seconde fois");
+	}
 }
-
-// Tout ça n'a rien a foutre dans le fichier User.class.php, mais c'est plus pratique pour apprendre
-
-// ------------------------------------------------------------------------
-// --------------------On va INSTANCIER notre classe User------------------
-// --------------------$user => objet--------------------------------------
-// --------------------User => classe--------------------------------------
-// --------------------Un objet est une instance d'une classe--------------
-// ------------------------------------------------------------------------
-
-$user = new User();
-$user->setLogin("toto");
-$user->initPassword("password", "password");
-
-var_dump($user);
-
-
 ?>
