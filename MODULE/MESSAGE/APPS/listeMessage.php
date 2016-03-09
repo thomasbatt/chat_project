@@ -4,8 +4,7 @@ $messages = $MessageManager->getAll();
 $count = 0;
 while ( isset($messages[$count]) )
 {
-	$IdUser = $messages[$count]->getIdUser();
-	$content = $messages[$count]->getContent();
+	$message = $messages[$count];
 	require('MODULE/MESSAGE/VIEWS/listeMessage.phtml');
 	$count++;
 }	

@@ -12,12 +12,12 @@ class MessageManager
 
 	public function getById($Id)
 	{
-		$Id = mysqli_real_escape_string($this->db, $Id);
+		$Id = intval($Id);
 		$query = "SELECT * FROM message WHERE Id_message='".$Id."'";
 		$res = mysqli_query($this->db, $query);
 		if ($res)
 		{
-			$message = mysqli_fetch_object($res, "Message");
+			$message = mysqli_fetch_object($res, "Message", [$this->db]);
 			if ($message)
 				return $message;
 			else
@@ -27,12 +27,12 @@ class MessageManager
 			throw new Exception("Erreur interne");
 	}
 
-	public function create($IdUser, $content)
+	public function create(User $user, $content)
 	{
-		$message = new Message();
-		$message->setIdUser($IdUser);
+		$message = new Message($this->db);
+		$message->setUser($user);
 		$message->setContent($content);
-		$IdUser = intval($message->getIdUser());
+		$IdUser = intval($message->getUser()->getId());
 		$content = mysqli_real_escape_string($this->db, $message->getContent());
 		// var_dump($message);
 		// exit;
@@ -53,7 +53,7 @@ class MessageManager
  		$res = mysqli_query($this->db, $query);
  		try
 		{
- 			while ( $message = mysqli_fetch_object($res, "Message") )
+ 			while ( $message = mysqli_fetch_object($res, "Message", [$this->db]) )
 				$messages [] = $message;
 			return $messages;
 		}

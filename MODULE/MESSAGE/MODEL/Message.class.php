@@ -6,8 +6,16 @@ class Message
 // ------------------------ Déclarer les propriétés-----------------------
 	private $id_message;
 	private $idUser_message;
+	private $user;// valeur calculée -> composition
 	private $content_message;
 	private $create_message;
+	private $db;
+
+	// Constructeur
+	public function __construct($db)
+	{
+		$this->db = $db;
+	}
 	
 // ------------------------Déclarer les méthodes--------------------------
 
@@ -17,8 +25,13 @@ class Message
 		return $this->id_message; // On récupère la propriété id_message de $this
 	}
 
-	public function getIdUser() {
-		return $this->idUser_message;
+	public function getUser() {
+		if ($this->user == null)
+		{
+			$manager = new UserManager($this->db);
+			$this->user = $manager->getById($this->idUser_message);
+		}
+		return $this->user;
 	}
 
 	public function getContent(){
@@ -30,10 +43,9 @@ class Message
 	}
 
 	// --------------------Liste des setters-------------------------------
-	public function setIdUser($idUser) {
-		if ($idUser > 0) {
-			$this->idUser_message = $idUser;
-		}
+	public function setUser(User $user) {
+		$this->idUser_message = $user->getId();
+		$this->user = $user;
 	}
 
 	public function setContent($content) {

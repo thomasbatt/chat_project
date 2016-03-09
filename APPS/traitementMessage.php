@@ -16,18 +16,20 @@ if (isset($_POST['action']))
 	$action = $_POST['action'];
 	if ($action == 'create_message')
 	{
-		if (isset($_POST['IdUser'], $_POST['content'] ))
+		if (isset( $_POST['content'] ))
 		{
 			$MessageManager = new MessageManager($db);
 			try
 			{
-				$MessageManager->create($_POST['IdUser'],$_POST['content']);
+				$manager = new UserManager($db);
+				$author = $manager->getById($_SESSION['id']);
+				$MessageManager->create($author, $_POST['content']);
 				header('Location: message');
 				exit;
 			}
 			catch (Exception $e)
 			{
-				$IdMessage = $_POST['IdUser'];
+				$IdMessage = $_POST['content'];
 				$error = $e->getMessage();
 			}
 		}

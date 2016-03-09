@@ -1,4 +1,3 @@
 <div class="form-group">
-	<label for="create_message"><?=htmlentities($IdUser)?></label>
-	<p><?=htmlentities($content)?></p>
+	<label for="create_message"><?=htmlentities($message->getUser()->getLogin())?> - <?=htmlentities($message->getContent())?></label>
 </div>

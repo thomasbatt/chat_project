@@ -29,7 +29,7 @@ class UserManager
 
 	public function getById($id)
 	{
-		$id = mysqli_real_escape_string($this->db, $id);
+		$id = intval($id);
 		$query = "SELECT * FROM user WHERE id_user='".$id."'";
 		$res = mysqli_query($this->db, $query);
 		if ($res)

@@ -134,3 +134,7 @@ a:focus, a:hover {
 .login-list{
   text-transform: capitalize;    
 }
+
+.form_create_message{
+  display: inline-block;
+}
