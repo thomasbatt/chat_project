@@ -3,11 +3,11 @@ class User {
 /********************************************************************************************
 ********************************* PROPRIETE *************************************************
 ********************************************************************************************/
-	private $id;
-	private $login;
-	private $hash;
-	private $createDate;
-	private $admin;
+	private $id_user;
+	private $login_user;
+	private $hash_user;
+	private $create_user;
+	private $isAdmin_user;
 	
 /********************************************************************************************
 ********************************* METHODE ***************************************************
@@ -17,23 +17,23 @@ class User {
 ********************************************************************************************/
 
 	public function getId() {
-		return $this->id; 
+		return $this->id_user; 
 	}
 
 	public function getLogin() {
-		return $this->login;
+		return $this->login_user;
 	}
 
 	public function getHash() {
-		return $this->hash;
+		return $this->hash_user;
 	}
 
 	public function getCreateDate() {
-		return $this->createDate;
+		return $this->create_user;
 	}
 
 	public function isAdmin() {
-		return $this->admin;
+		return $this->isAdmin_user;
 	} 
 
 /******************************** SETTER ****************************************************
@@ -41,15 +41,15 @@ class User {
 
 	public function setLogin($login) {
 		if (strlen($login) > 3 && strlen($login) < 31) {
-			$this->login = $login;
+			$this->login_user = $login;
 		} else {
-			throw new Exception("Login incorrect (doit être compris entre 4 et 30 caractères)");
+			throw new Exception("login_user incorrect (doit être compris entre 4 et 30 caractères)");
 		}
 	}
 
 	public function setAdmin($admin) {
 		if ($admin === true || $admin === false) {
-			$this->admin = $admin;
+			$this->isAdmin_user = $admin;
 		} else {
 			throw new Exception("Admin incorrect (doit être égal à true ou false)");
 		}
@@ -59,7 +59,7 @@ class User {
 ********************************************************************************************/
 	public function verifPassword($password)
 	{
-		return password_verify($password, $this->hash);
+		return password_verify($password, $this->hash_user);
 	}
 
 /******************************** PASSWORD EDIT *********************************************
@@ -72,7 +72,7 @@ class User {
 			{
 				if ($this->verifPassword($newPassword1)) 
 				{
-					$this->hash = password_hash($newPassword1, PASSWORD_BCRYPT, ["cost"=>12]);
+					$this->hash_user = password_hash($newPassword1, PASSWORD_BCRYPT, ["cost"=>12]);
 				}
 				else
 				{
@@ -94,12 +94,12 @@ class User {
 ********************************************************************************************/
 	public function initPassword($newPassword1, $newPassword2)
 	{
-		if ($this->hash == NULL) {
+		if ($this->hash_user == NULL) {
 			if ($newPassword1 == $newPassword2) 
 			{
 				if (strlen($newPassword1) > 5) 
 				{
-					$this->hash = password_hash($newPassword1, PASSWORD_BCRYPT, ["cost"=>12]);
+					$this->hash_user = password_hash($newPassword1, PASSWORD_BCRYPT, ["cost"=>12]);
 				}
 			}
 			else

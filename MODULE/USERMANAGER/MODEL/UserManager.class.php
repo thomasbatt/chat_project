@@ -19,7 +19,7 @@ class UserManager
 
 /******************************** ALL INFO USER BY LOGIN ************************************
 ********************************************************************************************/
-	public function getByLogin($login)
+	public function getUserByLogin($login)
 	{
 		$login = mysqli_real_escape_string($this->db, $login);
 		$query = "SELECT * FROM user WHERE login_user='".$login."'";
@@ -46,13 +46,13 @@ class UserManager
 ********************************************************************************************/
 	public function getLoginExiste($login)
 	{
-		$login = mysqli_real_escape_string($this->db, $login);
-		$query = "SELECT id_user FROM user WHERE login_user='".$login."'";
+		$loginVerif = mysqli_real_escape_string($this->db, $login);
+		$query = "SELECT id_user FROM user WHERE login_user='".$loginVerif."'";
 		$res = mysqli_query($this->db, $query);
 		if ($res)
 		{
 			$idUser = mysqli_fetch_row($res);
-			if ($idUser != NULL) 
+			if ($idUser == NULL) 
 			{
 				return TRUE;
 			}
@@ -64,6 +64,31 @@ class UserManager
 		else
 		{
 			throw new Exception("Erreur login test");
+		}
+	}
+
+/******************************** CONNECT USER **********************************************
+********************************************************************************************/
+	public function getConnect($login, $password)
+	{
+		$login = mysqli_real_escape_string($this->db, $login);
+		$query = "SELECT * FROM user WHERE login_user='".$login."'";
+		$res = mysqli_query($this->db, $query);
+		if ($res)
+		{
+			$user = mysqli_fetch_object($res, "User");
+			if ($user->verifPassword($password)) 
+			{
+				return $user;
+			}
+			else
+			{
+				throw new Exception("le mot de pass ou le login est faux");
+			}
+		}
+		else
+		{
+			throw new Exception("le mot de pass ou le login est faux");
 		}
 	}
 
@@ -93,16 +118,9 @@ class UserManager
 			$nombreErrors++;
 		}
 
-		if ($nombreErrors == 0) {
-			try
-			{
-				$testLogin = $this->getLoginExiste($login);
-			}
-			catch(Exception $e)
-			{
-				$errors['loginExiste'] = $e->getMessage();
-			}
-			if ($testLogin == FALSE) 
+		if ($nombreErrors == 0) 
+		{
+			if ($this->getLoginExiste($login)) 
 			{
 				$loginVerif = mysqli_real_escape_string($this->db, $user->getLogin());
 				$hashVerif = mysqli_real_escape_string($this->db, $user->getHash());
