@@ -1,7 +1,8 @@
 <?php
 // PascalCase pour le nom des classes
 // camelCase pour le nom des variables
-class User {
+class User 
+{
 // ------------------------ Déclarer les propriétés-----------------------
 	private $id;
 	private $login;

@@ -12,17 +12,18 @@
 	</div>
 	<div class="clearfix"></div>
 	<div class="collapse navbar-collapse">
+	    <div class="navbar-form">
+	        <form method= "POST">
+	        	<div class="login-title">
+	        		<b ><?=htmlentities($_SESSION['login'])?></b>
+	        	</div>
+	            <button type="submit" class="btn btn-warning navbar-btn" name="action" value="logout"> Déconnecter</button>
+	         </form>
+	    </div>
 		<ul class="nav nav-stacked" id="menu-bar">
-			<li><a href="#">Messages</a></li>
-		    <li><a href="#">Account</a></li>
+			<li><a href="message">Messages</a></li>
+		    <li><a href="profil">Account</a></li>
 		</ul>
-	    <ul class="form-nav nav navbar-nav navbar-right">
-	        <li><p class="navbar-text">Bienvenue <b><?=htmlentities($_SESSION['login'])?></b></p></li>
-	          <form method= "post">
-	            <button type="submit" class="btn btn-warning navbar-btn" name="action" value="logout">Se déconnecter</button>
-	          </form>
-	        </li>
-	     </ul>
 	</div>
 
 	<div class="clearfix"></div>
