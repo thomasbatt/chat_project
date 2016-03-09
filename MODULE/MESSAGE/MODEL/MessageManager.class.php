@@ -47,9 +47,9 @@ class MessageManager
 		}
 	}
 
- 	public function getAll()
+ 	public function getAll($limit)
  	{
- 		$query = "SELECT * FROM message";
+ 		$query = "SELECT * FROM message ORDER BY create_message DESC LIMIT $limit ";
  		$res = mysqli_query($this->db, $query);
  		try
 		{
