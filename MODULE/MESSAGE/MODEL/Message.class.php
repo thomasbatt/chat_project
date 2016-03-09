@@ -1,46 +1,78 @@
 <?php
+// PascalCase pour le nom des classes
+// camelCase pour le nom des variables
+class Message
+{
+// ------------------------ Déclarer les propriétés-----------------------
+	private $id_message;
+	private $idUser_message;
+	private $user;// valeur calculée -> composition
+	private $content_message;
+	private $create_message;
+	private $db;
 
-class Message {
+	// Constructeur
+	public function __construct($db)
+	{
+		$this->db = $db;
+	}
+	
+// ------------------------Déclarer les méthodes--------------------------
 
-	private $id;
-	private $id_user; // author
-	private $content;
-	private $createDate;
+	// --------------------Liste des getters------------------------------
 
 	public function getId() {
-		return $this->id;
+		return $this->id_message; // On récupère la propriété id_message de $this
 	}
 
-	public function getAuthor() {
-		return $this->id_user;
+	public function getUser() {
+		if ($this->user == null)
+		{
+			$manager = new UserManager($this->db);
+			$this->user = $manager->getById($this->idUser_message);
+		}
+		return $this->user;
 	}
 
-	public function getContent() {
-		return $this->content;
+	public function getContent(){
+		return $this->content_message;
 	}
 
 	public function getCreateDate() {
-		return $this->createDate;
+		return $this->create_message;
 	}
 
-	public function setId($id) {
-		if ($id > 0 ) {
-			$this->id_user = $id;
-		}
+	// --------------------Liste des setters-------------------------------
+	public function setUser(User $user) {
+		$this->idUser_message = $user->getId();
+		$this->user = $user;
 	}
 
 	public function setContent($content) {
-		if (strlen($content) > 10 && strlen($content) < 1023) {
-			$this->content = $content;
+		if (strlen($content) > 3 && strlen($content) < 1023) {
+			$this->content_message = $content;
 		}
 	}
+	// --------------------Liste des méthodes "autres"---------------------
+
+	// --------------------verifier password ?---------------------
+
 }
 
-$test = new Message();
-$test->setId(10);
-$test->setContent("Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus laboriosam quidem magnam animi quod! Aliquid possimus recusandae quis saepe dolores unde dolorem laborum illo similique eligendi, beatae, deleniti iusto esse.");
+// Tout ça n'a rien a foutre dans le fichier User.class.php, mais c'est plus pratique pour apprendre
 
-var_dump($test);
+// ------------------------------------------------------------------------
+// --------------------On va INSTANCIER notre classe User------------------
+// --------------------$user => objet--------------------------------------
+// --------------------User => classe--------------------------------------
+// --------------------Un objet est une instance d'une classe--------------
+// ------------------------------------------------------------------------
+
+// $user = new User();
+// $user->setLogin("toto");
+// $user->initPassword("password", "password");
+
+// var_dump($user);
 
 
 ?>

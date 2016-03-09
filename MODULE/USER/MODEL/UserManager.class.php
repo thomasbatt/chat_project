@@ -92,8 +92,33 @@ class UserManager
 		}
 	}
 
+
 /******************************** CREATE USER ***********************************************
 ********************************************************************************************/
+
+	public function getById($id)
+	{
+		$id = intval($id);
+		$query = "SELECT * FROM user WHERE id_user='".$id."'";
+		$res = mysqli_query($this->db, $query);
+		if ($res)
+		{
+			$user = mysqli_fetch_object($res, "User");
+			if ($user)
+			{
+				return $user;
+			}
+			else
+			{
+				throw new Exception("id incorrect");
+			}
+		}
+		else
+		{
+			throw new Exception("Erreur interne");
+		}
+	}
+
 	public function create($login, $password1, $password2)
 	{
 		$nombreErrors = 0;

@@ -112,7 +112,7 @@ a:hover .site-title {
 }
 
 .container {
-  padding-top: 30px;
+  padding-top: 0px;
   padding-left: 30px;
   margin-right: auto;
   margin-left: auto;
@@ -133,4 +133,8 @@ a:focus, a:hover {
 
 .login-list{
   text-transform: capitalize;    
+}
+
+.form_create_message{
+  display: inline-block;
 }
