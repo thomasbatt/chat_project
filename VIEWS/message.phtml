@@ -1,8 +1,11 @@
-<div class="listeMessage col-xs-10 col-xs-offset-1">
-	<div class="row">
-		<?php require('MODULE/MESSAGE/APPS/listeMessage.php'); ?>
+<div class="col-xs-12">
+	<div class="modal-header">
+	    <h3 class="modal-title" id="modal-label-register">Messages</h3>
 	</div>
-</div>
-<div class="createMessage col-xs-10 col-xs-offset-1">
-	<?php require('MODULE/MESSAGE/APPS/createMessage.php'); ?>
+	<div class="jumbotron">
+		<form method="POST">
+			<?php require('MODULE/MESSAGE/APPS/listeMessage.php'); ?>
+			<?php require('MODULE/MESSAGE/APPS/createMessage.php'); ?>
+		</form>
+	</div>
 </div>

@@ -9,6 +9,8 @@ spl_autoload_register(function($class)
     $accessClass = [
     	'User' => 'MODULE/USER/MODEL/'.$class.'.class.php',
     	'UserManager' => 'MODULE/USER/MODEL/'.$class.'.class.php', 
+    	'Message' => 'MODULE/MESSAGE/MODEL/'.$class.'.class.php',
+    	'MessageManager' => 'MODULE/MESSAGE/MODEL/'.$class.'.class.php', 
     ];
     require($accessClass[$class]);
 });
@@ -54,6 +56,7 @@ $traitement_action = array(
 	'login' => 'User',
 	'logout' => 'User',
 	'information' => 'User',
+	'create_message' => 'Message',
 );
 
 if (isset($_POST['action'])) 

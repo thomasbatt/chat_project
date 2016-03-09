@@ -1,1 +1,11 @@
-<h1>ici la creation de message</h1>
+<div class="form-group">
+	<label for="create_message"><?=htmlentities($_SESSION['login'])?></label>
+	<input type="hidden" name="IdUser" value="<?=htmlentities($_SESSION['id'])?>">
+	<input type="text" class="form-control" id="create_message" name="content" value="Message de <?=htmlentities($_SESSION['login'])?>">
+</div>
+<button type="submit" class="btn btn-success" name="action" value="create_message">Envoyer</button>
+
+
+  
+
+
