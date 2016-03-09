@@ -2,8 +2,11 @@
 
 spl_autoload_register(function($class)
 {
-	$module = strtoupper($class);
-    require('MODULE/'.$module.'/MODEL/'.$class.'.class.php');
+    $accessClass = [
+    	'User' => 'MODULE/USER/MODEL/'.$class.'.class.php',
+    	'UserManager' => 'MODULE/USER/MODEL/'.$class.'.class.php', 
+    ];
+    require($accessClass[$class]);
 });
 
 session_start();
@@ -12,14 +15,15 @@ var_dump($_POST);
 // var_dump($_GET);
 var_dump($_SESSION);
 
-$page = "profil";
+$page = 'home';
 
 require('APPS/listeErrors.php');
 require('config.php');
 
-$bdd = mysqli_connect($config['host'], $config['login'], $config['password'], $config['bdd']);
+$bdd = @mysqli_connect($config['host'], $config['login'], $config['password'], $config['bdd']);
 if (!$bdd) {
-	$_GET['page'] = 'errors';
+	require('VIEWS/errors500.phtml');
+	// $_GET['page'] = 'errors';
 }
 
 $access = ['home'];

@@ -1,3 +1,4 @@
 <?php
-	require('VIEWS/errors500.phtml');
+if (!empty($error))
+	require('VIEWS/errors.phtml');
 ?>
