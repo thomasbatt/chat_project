@@ -4,56 +4,51 @@
 class User 
 {
 // ------------------------ Déclarer les propriétés-----------------------
-	private $id;
-	private $login;
-	private $hash;
-	private $createDate;
-	private $admin;
+	private $id_user;
+	private $login_user;
+	private $hash_user;
+	private $create_user;
+	private $isAdmin_user;
 	
 // ------------------------Déclarer les méthodes--------------------------
 
 	// --------------------Liste des getters------------------------------
 
 	public function getId() {
-		return $this->id; // On récupère la propriété id de $this
+		return $this->id_user; // On récupère la propriété id_user de $this
 	}
 
 	public function getLogin() {
-		return $this->login;
-	}
-
-	public function getDate()
-	{
-		return $this->date;
+		return $this->login_user;
 	}
 
 	public function getHash()
 	{
-		return $this->hash;
+		return $this->hash_user;
 	}
 
 	public function getCreateDate() {
-		return $this->createDate;
+		return $this->create_user;
 	}
 
 	public function isAdmin() { // Un getter d'un booleen transforme le get en is
-		return $this->admin;
+		return $this->isAdmin_user;
 	}
 
 	// --------------------Liste des setters-------------------------------
 	public function setLogin($login) {
 		if (strlen($login) > 3 && strlen($login) < 31) {
-			$this->login = $login;
+			$this->login_user = $login;
 		}
 	}
 
 	public function setAdmin($admin) {
 		// methode 1
 		if ($admin === true || $admin === false) {
-			$this->admin = $admin;
+			$this->admin_user = $admin;
 		}
 		// ou methode 2
-		$this->admin = (bool)$admin; // (bool) permet de "caster" une variable en un type particulier, transformer n'importe quel type en booleen (ici)
+		$this->admin_user = (bool)$admin; // (bool) permet de "caster" une variable en un type particulier, transformer n'importe quel type en booleen (ici)
 	}
 
 	// --------------------Liste des méthodes "autres"---------------------
@@ -61,7 +56,7 @@ class User
 	// --------------------verifier password ?---------------------
 	public function verifPassword($password)
 	{
-		if (!password_verify($password, $this->hash))
+		if (!password_verify($password, $this->hash_user))
 			throw new Exception("Mot de passe incorrect");
 	}
 
@@ -75,7 +70,7 @@ class User
 			{
 				if ($this->verifPassword($oldPassword))
 				{
-					$this->hash = password_hash($newPassword, PASSWORD_BCRYPT, ["cost"=>12]);
+					$this->hash_user = password_hash($newPassword, PASSWORD_BCRYPT, ["cost"=>12]);
 				}
 				else
 					throw new Exception("Ancien mot de passe incorrect");
@@ -89,14 +84,14 @@ class User
 
 	public function initPassword($newPassword1, $newPassword2)
 	{
-		if ($this->hash == null)
+		if ($this->hash_user == null)
 		{
 			if ($newPassword1 === $newPassword2)
 			{
 				$newPassword = $newPassword1;
 				if (strlen($newPassword) > 5)
 				{
-					$this->hash = password_hash($newPassword, PASSWORD_BCRYPT, ["cost"=>12]);
+					$this->hash_user = password_hash($newPassword, PASSWORD_BCRYPT, ["cost"=>12]);
 				}
 				else
 					throw new Exception("Mot de passe est trop court (< 6 caractères)");

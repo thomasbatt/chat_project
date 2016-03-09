@@ -1,10 +1,19 @@
 <?php
-session_start();
-
 // var_dump($_GET);
 // var_dump($_POST);
 // var_dump($_SESSION);
 // exit;
+
+spl_autoload_register(function($class)
+{
+    $accessClass = [
+    	'User' => 'MODULE/USER/MODEL/'.$class.'.class.php',
+    	'UserManager' => 'MODULE/USER/MODEL/'.$class.'.class.php', 
+    ];
+    require($accessClass[$class]);
+});
+
+session_start();
 
 $page = 'home';
 

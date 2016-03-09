@@ -13,7 +13,7 @@ class UserManager
 	public function getByLogin($login)
 	{
 		$login = mysqli_real_escape_string($this->db, $login);
-		$query = "SELECT * FROM user WHERE login='".$login."'";
+		$query = "SELECT * FROM user WHERE login_user='".$login."'";
 		$res = mysqli_query($this->db, $query);
 		if ($res)
 		{
@@ -34,7 +34,7 @@ class UserManager
 		$user->initPassword($pass1, $pass2);
 		$login = mysqli_real_escape_string($this->db, $user->getLogin());
 		$hash = mysqli_real_escape_string($this->db, $user->getHash());
-		$query = "INSERT INTO user (login, hash) VALUES('".$login."', '".$hash."')";
+		$query = "INSERT INTO user (login_user, hash_user) VALUES('".$login."', '".$hash."')";
 		try
 		{
 			$res = mysqli_query($this->db, $query);
@@ -46,21 +46,21 @@ class UserManager
 		return $this->getByLogin($user->getLogin());
 	}
 
-	public function getById($id)
-	{
-		$id = intval($id);
-		$query = "SELECT * FROM user WHERE id='".$id."'";
-		$res = mysqli_query($this->db, $query);
-		if ($res)
+ 	public function getAll()
+ 	{
+ 		$query = "SELECT * FROM user";
+ 		$res = mysqli_query($this->db, $query);
+ 		try
 		{
-			$user = mysqli_fetch_object($res, "User");
-			if ($user)
-				return $user;
-			else
-				return false;
+ 			while ( $user = mysqli_fetch_object($res, "User") )
+				$users [] = $user;
+			return $users;
 		}
-		else
-			return false;
-	}
+		catch (Exception $e)
+		{
+			throw new Exception("Erreur interne");
+		}
+ 	}
+
 }
 ?>

@@ -1,13 +1,14 @@
 <?php
-require('MODULE/USER/MODEL/User.class.php');
-require('MODULE/USER/MODEL/UserManager.class.php');
+// require('MODULE/USER/MODEL/User.class.php');
+// require('MODULE/USER/MODEL/UserManager.class.php');
 $UserManager = new UserManager($db);
-$id = '1';
-while( $UserManager->getById($id) )
+$users = $UserManager->getAll();
+$count = 0;
+while ( isset($users[$count]) )
 {
-	$user = $UserManager->getById($id);
-	$login = $user->getLogin();
+	$login = $users[$count]->getlogin();
 	require('MODULE/USER/VIEWS/user.phtml');
-	$id++;
-}
+	$count++;
+}	
+
 ?>
