@@ -13,7 +13,7 @@ class MessageManager
 	public function getById($Id)
 	{
 		$Id = intval($Id);
-		$query = "SELECT * FROM message WHERE Id_message='".$Id."'";
+		$query = "SELECT * FROM message WHERE id_message='".$Id."'";
 		$res = mysqli_query($this->db, $query);
 		if ($res)
 		{
