@@ -21,8 +21,12 @@ session_start();
 require('APPS/listeErrors.php');
 require('config.php');
 
-$db = @mysqli_connect($config['host'], $config['login'], $config['password'], $config['bdd']);
-if (!$db) {
+try
+{
+    $db = new PDO('mysql:dbname='.$config['bdd'].';host='.$config['host'], $config['login'], $config['password']);
+}
+catch (PDOException $e)
+{
 	require('VIEWS/errors500.phtml');
 	die();
 	// $_GET['page'] = 'errors';

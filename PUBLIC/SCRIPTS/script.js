@@ -22,7 +22,7 @@ $('document').ready(function(){
     setInterval(function()
     {
         refresh();
-    },5000);
+    },1000);
 
     $(window).scroll(function(){
         if ($(this).scrollTop() > 100) {

@@ -13,11 +13,11 @@ class MessageManager
 	public function getById($Id)
 	{
 		$Id = intval($Id);
-		$query = "SELECT * FROM message WHERE id_message='".$Id."'";
-		$res = mysqli_query($this->db, $query);
+		$query = "SELECT * FROM message WHERE id_message=".$Id;
+		$res = $this->db->query($query);
 		if ($res)
 		{
-			$message = mysqli_fetch_object($res, "Message", [$this->db]);
+			$message = $res->fetchObject("Message", [$this->db]);
 			if ($message)
 				return $message;
 			else
@@ -33,13 +33,14 @@ class MessageManager
 		$message->setUser($user);
 		$message->setContent($content);
 		$IdUser = intval($message->getUser()->getId());
-		$content = mysqli_real_escape_string($this->db, $message->getContent());
+		$content = $this->db->quote($message->getContent());
 		// var_dump($message);
+		$query = "INSERT INTO message (idUser_message, content_message) VALUES('".$IdUser."',".$content.")";
+		// var_dump($query);
 		// exit;
-		$query = "INSERT INTO message (idUser_message, content_message) VALUES('".$IdUser."', '".$content."')";
 		try
 		{
-			$res = mysqli_query($this->db, $query);
+			$res = $this->db->exec($query);
 		}
 		catch (Exception $e)
 		{
@@ -49,11 +50,12 @@ class MessageManager
 
  	public function getAll($limit)
  	{
+ 		$limit = intval($limit);
  		$query = "SELECT * FROM message ORDER BY create_message DESC LIMIT $limit ";
- 		$res = mysqli_query($this->db, $query);
+ 		$res = $this->db->query($query);
  		try
 		{
- 			while ( $message = mysqli_fetch_object($res, "Message", [$this->db]) )
+ 			while ( $message = $res->fetchObject("Message", [$this->db]) )
 				$messages [] = $message;
 			return $messages;
 		}

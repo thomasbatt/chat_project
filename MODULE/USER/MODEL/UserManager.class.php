@@ -5,19 +5,23 @@ class UserManager
 	private $db;
 
 	// Constructeur
-	public function __construct($db)
+	public function __construct(PDO $db)
 	{
 		$this->db = $db;
 	}
 
 	public function getByLogin($login)
 	{
-		$login = mysqli_real_escape_string($this->db, $login);
-		$query = "SELECT * FROM user WHERE login_user='".$login."'";
-		$res = mysqli_query($this->db, $query);
+		var_dump($login);
+		$login = $this->db->quote($login);
+		var_dump($login);
+		$query = "SELECT * FROM user WHERE login_user=".$login;
+		var_dump($query);
+		$res = $this->db->query($query);
+		var_dump($res);
 		if ($res)
 		{
-			$user = mysqli_fetch_object($res, "User");
+			$user = $res->fetchObject("User");
 			if ($user)
 				return $user;
 			else
@@ -30,11 +34,11 @@ class UserManager
 	public function getById($id)
 	{
 		$id = intval($id);
-		$query = "SELECT * FROM user WHERE id_user='".$id."'";
-		$res = mysqli_query($this->db, $query);
+		$query = "SELECT * FROM user WHERE id_user=".$id;
+		$res = $this->db->query($query);
 		if ($res)
 		{
-			$user = mysqli_fetch_object($res, "User");
+			$user = $res->fetchObject("User");
 			if ($user)
 				return $user;
 			else
@@ -49,12 +53,12 @@ class UserManager
 		$user = new User();
 		$user->setLogin($login);
 		$user->initPassword($pass1, $pass2);
-		$login = mysqli_real_escape_string($this->db, $user->getLogin());
-		$hash = mysqli_real_escape_string($this->db, $user->getHash());
-		$query = "INSERT INTO user (login_user, hash_user) VALUES('".$login."', '".$hash."')";
+		$login = $this->db->quote($user->getLogin());
+		$hash = $this->db->quote($user->getHash());
+		$query = "INSERT INTO user (login_user, hash_user) VALUES(".$login.",".$hash.")";
 		try
 		{
-			$res = mysqli_query($this->db, $query);
+			$res = $this->db->exec($query);
 		}
 		catch (Exception $e)
 		{
@@ -66,10 +70,10 @@ class UserManager
  	public function getAll()
  	{
  		$query = "SELECT * FROM user";
- 		$res = mysqli_query($this->db, $query);
+ 		$res = $this->db->query($query);
  		try
 		{
- 			while ( $user = mysqli_fetch_object($res, "User") )
+ 			while ( $user = $res->fetchObject("User") )
 				$users [] = $user;
 			return $users;
 		}
