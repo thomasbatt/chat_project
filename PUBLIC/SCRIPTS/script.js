@@ -4,6 +4,10 @@ function refresh()
     {
         $('.js_list').html(html);
     });
+    $.get('index.php?ajax&page=footer', function(html)
+    {
+        $('.js_footer').html(html);
+    });
 }
 $('document').ready(function(){ 
  

@@ -52,6 +52,8 @@ class Message
 		if (strlen($content) > 3 && strlen($content) < 1023) {
 			$this->content_message = $content;
 		}
+		else
+			throw new Exception("erreur content");
 	}
 	// --------------------Liste des méthodes "autres"---------------------
 

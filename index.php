@@ -1,4 +1,5 @@
 <?php
+
 // var_dump($_GET);
 // var_dump($_POST);
 // var_dump($_SESSION);
@@ -35,17 +36,25 @@ catch (PDOException $e)
 if (isset($_SESSION['id']))
 {
 	$page = 'home';
-	$access = ['home' , 'message', 'profil' , 'listeMessage'];
+	$access = ['home' , 'message', 'profil' ];
+	$ajax = [
+		'listeMessage'=>'MODULE/MESSAGE/APPS/listeMessage.php',
+		'footer'=>'APPS/footer.php'
+	];
 }
 else
 {
 	$page = 'home';
 	$access = ['home'];
+	$ajax = [];
 }
 if (isset($_GET['page']))
 {
-	if (in_array($_GET['page'], $access))
+	if (in_array($_GET['page'], $access ))
 		$page = $_GET['page'];
+	elseif (isset($ajax[$_GET['page']])) {
+		$page = $ajax[$_GET['page']];
+	}
 	else
 	{
 		header('Location: '.$page);
@@ -74,11 +83,15 @@ if (isset($_POST['action']))
 if (!isset($_GET['ajax']))
 	require('APPS/skel.php');
 else
-{
-	$accessAjax = [
-    	'listeMessage' => 'MODULE/MESSAGE/APPS/'.$page.'.php',
-    	'footer' => 'APPS/'.$page.'.php',
-    ];
-    require($accessAjax[$page]);
-}
+	require($page);
+	// if (in_array($_GET['page'], $ajax ))
+	// {
+	// 	$page = $_GET['page'];
+
+	// 	$accessAjax = [
+ //    		'listeMessage' => 'MODULE/MESSAGE/APPS/'.$page.'.php',
+ //    		'footer' => 'APPS/'.$page.'.php',
+ //    	];
+ //    	require($accessAjax[$page]);
+ //    }
 ?>

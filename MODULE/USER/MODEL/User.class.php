@@ -8,6 +8,7 @@ class User
 	private $login_user;
 	private $hash_user;
 	private $create_user;
+	private $update_user;
 	private $isAdmin_user;
 	
 // ------------------------Déclarer les méthodes--------------------------
@@ -31,6 +32,10 @@ class User
 		return $this->create_user;
 	}
 
+	public function getUpdate() {
+		return $this->update_user;
+	}
+
 	public function isAdmin() { // Un getter d'un booleen transforme le get en is
 		return $this->isAdmin_user;
 	}
@@ -39,6 +44,12 @@ class User
 	public function setLogin($login) {
 		if (strlen($login) > 3 && strlen($login) < 31) {
 			$this->login_user = $login;
+		}
+	}
+
+	public function setUpdate($date) {
+		if ($date > time() ) {
+			$this->update_user = $date;
 		}
 	}
 

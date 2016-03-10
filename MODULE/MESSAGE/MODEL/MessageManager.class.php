@@ -31,20 +31,30 @@ class MessageManager
 	{
 		$message = new Message($this->db);
 		$message->setUser($user);
-		$message->setContent($content);
-		$IdUser = intval($message->getUser()->getId());
-		$content = $this->db->quote($message->getContent());
-		// var_dump($message);
-		$query = "INSERT INTO message (idUser_message, content_message) VALUES('".$IdUser."',".$content.")";
-		// var_dump($query);
-		// exit;
 		try
 		{
-			$res = $this->db->exec($query);
+			$message->setContent($content);
 		}
 		catch (Exception $e)
 		{
-			throw new Exception("Erreur interne");
+			$errorinput = $e; 	
+		}
+		if( !isset($errorinput) )
+		{
+			$IdUser = intval($message->getUser()->getId());
+			$content = $this->db->quote($message->getContent());
+			// var_dump($message);
+			$query = "INSERT INTO message (idUser_message, content_message) VALUES('".$IdUser."',".$content.")";
+			// var_dump($query);
+			// exit;
+			try
+			{
+				$res = $this->db->exec($query);
+			}
+			catch (Exception $e)
+			{
+				throw new Exception("Erreur interne");
+			}
 		}
 	}
 

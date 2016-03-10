@@ -138,3 +138,7 @@ a:focus, a:hover {
 .form_create_message{
   display: inline-block;
 }
+
+li .login-list a, li .login-list span{
+  display: inline-block;
+}
