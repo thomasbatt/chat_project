@@ -1,7 +1,7 @@
 <div class="form-group">
 	<label for="create_message"><?=htmlentities($_SESSION['login'])?></label>
 	<input type="hidden" name="IdUser" value="<?=htmlentities($_SESSION['id'])?>">
-	<input type="text" class="form_create_message form-control" id="create_message" name="content" value="Message de <?=htmlentities($_SESSION['login'])?>">
+	<input type="text" class="js_in form_create_message form-control" id="create_message" name="content" value="Message de <?=htmlentities($_SESSION['login'])?>">
 	<button type="submit" class="form_create_message btn btn-success" name="action" value="create_message">Envoyer</button>
 </div>
 

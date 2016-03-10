@@ -17,7 +17,6 @@ spl_autoload_register(function($class)
 
 session_start();
 
-$page = 'home';
 
 require('APPS/listeErrors.php');
 require('config.php');
@@ -29,35 +28,34 @@ if (!$db) {
 	// $_GET['page'] = 'errors';
 }
 
-$access = ['home'];
-$accessConnecter = ['message', 'profil'];
+if (isset($_SESSION['id']))
+{
+	$page = 'home';
+	$access = ['home' , 'message', 'profil' , 'listeMessage'];
+}
+else
+{
+	$page = 'home';
+	$access = ['home'];
+}
 if (isset($_GET['page']))
 {
-	if (in_array($_GET['page'], $access)) 
-	{
+	if (in_array($_GET['page'], $access))
 		$page = $_GET['page'];
-	} 
-	elseif (isset($_SESSION['id'])) 
-	{
-		if (in_array($_GET['page'], $accessConnecter)) 
-		{
-		$page = $_GET['page'];
-		}
-	}
 	else
 	{
-		header('Location: home');
+		header('Location: '.$page);
 		exit;
 	}
 }
 
-$traitement_action = array(
+$traitement_action = [
 	'register' => 'User',
 	'login' => 'User',
 	'logout' => 'User',
 	'information' => 'User',
 	'create_message' => 'Message',
-);
+];
 
 if (isset($_POST['action'])) 
 {
@@ -68,5 +66,15 @@ if (isset($_POST['action']))
 		require('APPS/traitement'.$value.'.php');
 	}
 }
-require('APPS/skel.php');
+
+if (!isset($_GET['ajax']))
+	require('APPS/skel.php');
+else
+{
+	$accessAjax = [
+    	'listeMessage' => 'MODULE/MESSAGE/APPS/'.$page.'.php',
+    	'footer' => 'APPS/'.$page.'.php',
+    ];
+    require($accessAjax[$page]);
+}
 ?>
