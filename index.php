@@ -35,10 +35,10 @@ catch (PDOException $e)
 
 if (isset($_SESSION['id']))
 {
-	$page = 'home';
-	$access = ['home' , 'message', 'profil' ];
+	$page = 'messages';
+	$access = [ 'messages', 'profil' ];
 	$ajax = [
-		'listeMessage'=>'MODULE/MESSAGE/APPS/listeMessage.php',
+		'listMessage'=>'MODULE/MESSAGE/APPS/listMessage.php',
 		'footer'=>'APPS/footer.php'
 	];
 }
@@ -52,7 +52,7 @@ if (isset($_GET['page']))
 {
 	if (in_array($_GET['page'], $access ))
 		$page = $_GET['page'];
-	elseif (isset($ajax[$_GET['page']])) {
+	else if (isset($ajax[$_GET['page']])) {
 		$page = $ajax[$_GET['page']];
 	}
 	else

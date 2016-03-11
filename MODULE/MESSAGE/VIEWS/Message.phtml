@@ -1,0 +1,13 @@
+<div class="wrapper-message">
+	<div class="left">
+		<div class="name-message">
+			<?=htmlentities($message->getUser()->getLogin())?>
+		</div>
+		<div>
+			<?=htmlentities($message->getContent())?>
+		</div>
+		<div class="heure-message text-right">
+			<?=htmlentities($date)?>
+		</div>
+	</div>
+</div>

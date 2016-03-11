@@ -18,15 +18,13 @@ if (isset($_POST['action']))
 	{
 		if (isset($_POST['login'], $_POST['password1'] , $_POST['password2']))
 		{
-			require('MODULE/USER/MODEL/User.class.php');
-			require('MODULE/USER/MODEL/UserManager.class.php');
-			$usermanager = new UserManager($db);
 			try
 			{
-				$user = $usermanager->create($_POST['login'],$_POST['password1'],$_POST['password2']);
+				$UserManager = new UserManager($db);
+				$user = $UserManager->create($_POST['login'],$_POST['password1'],$_POST['password2']);
 				$_SESSION['id'] = $user->getId();
 				$_SESSION['login'] = $user->getLogin();
-				header('Location: message');
+				header('Location: messages');
 				exit;
 			}
 			catch (Exception $e)
@@ -40,20 +38,14 @@ if (isset($_POST['action']))
 	{
 		if (isset($_POST['login'], $_POST['password']))
 		{
-			require('MODULE/USER/MODEL/User.class.php');
-			require('MODULE/USER/MODEL/UserManager.class.php');
-			// $usermanager = new UserManager($db);
 			try
 			{
-				$manager = new UserManager($db);
-				$user = $manager->getByLogin($_POST['login']);
-				// var_dump($user);
+				$UserManager = new UserManager($db);
+				$user = $UserManager->getByLogin($_POST['login']);
 				$user->verifPassword($_POST['password']);
 				$_SESSION['id'] = $user->getId();
 				$_SESSION['login'] = $user->getLogin();
-				// var_dump($_SESSION);
-				// exit;
-				header('Location: message');
+				header('Location: messages');
 				exit;
 			}
 			catch (Exception $e)

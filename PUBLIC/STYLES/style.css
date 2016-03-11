@@ -142,3 +142,43 @@ a:focus, a:hover {
 li .login-list a, li .login-list span{
   display: inline-block;
 }
+
+.message{
+  /*margin-bottom: 30px;*/
+}
+
+.right{
+  display: inline-block;
+  background-color: rgba(94, 181, 42, 0.51);
+  border-radius: 6px;
+  padding: 5px 15px;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.left{
+  display: inline-block;
+  background-color: #EEE;
+  border-radius: 6px;
+  padding: 5px 15px;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.name-message{
+  font-size: 11px;
+  padding-bottom: 2px;
+  text-transform: capitalize;
+}
+
+.heure-message{
+  /*margin-top: 5px;*/
+  font-size: 9px;
+}
+/*
+
+.message .jumbotron{
+}
+
+.message .jumbotron.connected {
+}*/

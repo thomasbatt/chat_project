@@ -1,6 +1,6 @@
 function refresh()
 {
-    $.get('index.php?ajax&page=listeMessage', function(html)
+    $.get('index.php?ajax&page=listMessage', function(html)
     {
         $('.js_list').html(html);
     });
@@ -15,7 +15,7 @@ $('document').ready(function(){
     {
         info.preventDefault();
         var message = $('.js_in').val();
-        $.post('message', {content:message,action:"create_message"}, function()
+        $.post('messages', {content:message,action:"create_message"}, function()
         {
             $('.js_in').val('').focus();
             refresh();

@@ -12,13 +12,9 @@ class UserManager
 
 	public function getByLogin($login)
 	{
-		var_dump($login);
 		$login = $this->db->quote($login);
-		var_dump($login);
 		$query = "SELECT * FROM user WHERE login_user=".$login;
-		var_dump($query);
 		$res = $this->db->query($query);
-		var_dump($res);
 		if ($res)
 		{
 			$user = $res->fetchObject("User");
@@ -86,7 +82,8 @@ class UserManager
  	public function isConnected($id)
  	{
  		$idVerif = intval($id);
- 		$query = "SELECT login_user FROM user WHERE update_user > CURRENT_TIMESTAMP - 10 AND id_user = '".$idVerif."'";
+ 		$query = "SELECT login_user FROM user 
+ 					WHERE update_user > CURRENT_TIMESTAMP - 10 AND id_user = '".$idVerif."'";
  		$res = $this->db->query($query);
  		$count = $res->rowCount();
  		if ($count == 0) 
@@ -95,10 +92,12 @@ class UserManager
  			return TRUE;
  	}
 
- 	public function editDateConnected($id)
+ 	public function upDateConnected($id)
  	{
- 		$time = time();
- 		$query = "UPDATE user SET update_user=CURRENT_TIMESTAMP WHERE id_user = '".$id."'";
+ 		// $time = time();
+ 		$query = "UPDATE user 
+ 					SET update_user=CURRENT_TIMESTAMP 
+ 					WHERE id_user = '".$id."'";
  		$res = $this->db->exec($query);
  	}
 

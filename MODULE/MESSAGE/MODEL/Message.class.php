@@ -49,7 +49,7 @@ class Message
 	}
 
 	public function setContent($content) {
-		if (strlen($content) > 3 && strlen($content) < 1023) {
+		if (strlen($content) > 1 && strlen($content) < 1023) {
 			$this->content_message = $content;
 		}
 		else

@@ -1,7 +1,7 @@
 <?php
 $UserManager = new UserManager($db);
 $users = $UserManager->getAll();
-$UserManager->editDateConnected($_SESSION['id']);
+$UserManager->upDateConnected($_SESSION['id']);
 $count = 0;
 while ( isset($users[$count]) )
 {
