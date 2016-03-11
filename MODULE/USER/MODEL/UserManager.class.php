@@ -12,7 +12,7 @@ class UserManager
 
 /******************************** CONSTRUCTOR ***********************************************
 ********************************************************************************************/
-	public function __construct(PDO $db)
+	public function __construct(PDO $bdd)
 	{
 		$this->db = $bdd;
 	}
@@ -198,7 +198,6 @@ class UserManager
 
  	public function editDateConnected($id)
  	{
- 		$time = time();
  		$query = "UPDATE user SET update_user=CURRENT_TIMESTAMP WHERE id_user = '".$id."'";
  		$res = $this->db->exec($query);
  	}
