@@ -5,7 +5,7 @@ class MessageManager
 	private $db;
 
 	// Constructeur
-	public function __construct($db)
+	public function __construct(PDO $db)
 	{
 		$this->db = $db;
 	}
@@ -14,10 +14,10 @@ class MessageManager
 	{
 		$Id = intval($Id);
 		$query = "SELECT * FROM message WHERE Id_message='".$Id."'";
-		$res = mysqli_query($this->db, $query);
+		$res = $this->db->query($query);
 		if ($res)
 		{
-			$message = mysqli_fetch_object($res, "Message", [$this->db]);
+			$message = $res->fetchObject('Message', [$this->db]);
 			if ($message)
 				return $message;
 			else
@@ -33,13 +33,13 @@ class MessageManager
 		$message->setUser($user);
 		$message->setContent($content);
 		$IdUser = intval($message->getUser()->getId());
-		$content = mysqli_real_escape_string($this->db, $message->getContent());
+		$content = $this->db->quote($message->getContent());
 		// var_dump($message);
 		// exit;
-		$query = "INSERT INTO message (idUser_message, content_message) VALUES('".$IdUser."', '".$content."')";
+		$query = "INSERT INTO message (idUser_message, content_message) VALUES('".$IdUser."', ".$content.")";
 		try
 		{
-			$res = mysqli_query($this->db, $query);
+			$res = $this->db->query($query);
 		}
 		catch (Exception $e)
 		{
@@ -50,10 +50,10 @@ class MessageManager
  	public function getAll()
  	{
  		$query = "SELECT * FROM message";
- 		$res = mysqli_query($this->db, $query);
+ 		$res = $this->db->query($query);
  		try
 		{
- 			while ( $message = mysqli_fetch_object($res, "Message", [$this->db]) )
+ 			while ($message = $res->fetchObject('Message', [$this->db]))
 				$messages [] = $message;
 			return $messages;
 		}

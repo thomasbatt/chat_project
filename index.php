@@ -22,10 +22,14 @@ $page = 'home';
 require('APPS/listeErrors.php');
 require('config.php');
 
-$bdd = @mysqli_connect($config['host'], $config['login'], $config['password'], $config['bdd']);
-if (!$bdd) {
-	require('VIEWS/errors500.phtml');
-	// $_GET['page'] = 'errors';
+try
+{
+    // $bdd = new PDO('mysql:dbname='.$config['bdd'].';host='.$config['host'].'', ''.$config['login'].'', ''.$config['password'].'');
+    $bdd = new PDO('mysql:dbname=tchat_object;host=192.168.1.7', 'root', 'troiswa');
+}
+catch (PDOException $e)
+{
+    $error = 'Erreur interne';
 }
 
 $access = ['home'];

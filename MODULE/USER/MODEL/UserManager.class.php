@@ -21,12 +21,12 @@ class UserManager
 ********************************************************************************************/
 	public function getUserByLogin($login)
 	{
-		$login = mysqli_real_escape_string($this->db, $login);
-		$query = "SELECT * FROM user WHERE login_user='".$login."'";
-		$res = mysqli_query($this->db, $query);
+		$login = $this->db->quote($login);
+		$query = "SELECT * FROM user WHERE login_user=".$login;
+		$res = $this->db->query($query);
 		if ($res)
 		{
-			$user = mysqli_fetch_object($res, "User");
+			$user = $this->res->fetchObject("User");
 			if ($user)
 			{
 				return $user;
@@ -46,13 +46,13 @@ class UserManager
 ********************************************************************************************/
 	public function getLoginExiste($login)
 	{
-		$loginVerif = mysqli_real_escape_string($this->db, $login);
-		$query = "SELECT id_user FROM user WHERE login_user='".$loginVerif."'";
-		$res = mysqli_query($this->db, $query);
+		$login = $this->db->quote($login);
+		$query = "SELECT id_user FROM user WHERE login_user=".$loginVerif;
+		$res = $this->bd->query($query);
 		if ($res)
 		{
-			$idUser = mysqli_fetch_row($res);
-			if ($idUser == NULL) 
+			$count = $res->rowCount();
+			if ($count == 0) 
 			{
 				return TRUE;
 			}
@@ -71,12 +71,12 @@ class UserManager
 ********************************************************************************************/
 	public function getConnect($login, $password)
 	{
-		$login = mysqli_real_escape_string($this->db, $login);
-		$query = "SELECT * FROM user WHERE login_user='".$login."'";
-		$res = mysqli_query($this->db, $query);
+		$loginVerif = $this->db->quote($login);
+		$query = "SELECT * FROM user WHERE login_user=".$loginVerif;
+		$res = $this->db->query($query);
 		if ($res)
 		{
-			$user = mysqli_fetch_object($res, "User");
+			$user = $res->fetchObject("User");
 			if ($user->verifPassword($password)) 
 			{
 				return $user;
@@ -100,10 +100,10 @@ class UserManager
 	{
 		$id = intval($id);
 		$query = "SELECT * FROM user WHERE id_user='".$id."'";
-		$res = mysqli_query($this->db, $query);
+		$res = $this->db->query($query);
 		if ($res)
 		{
-			$user = mysqli_fetch_object($res, "User");
+			$user = $res->fetchObject('User');
 			if ($user)
 			{
 				return $user;
@@ -147,11 +147,12 @@ class UserManager
 		{
 			if ($this->getLoginExiste($login)) 
 			{
-				$loginVerif = mysqli_real_escape_string($this->db, $user->getLogin());
-				$hashVerif = mysqli_real_escape_string($this->db, $user->getHash());
-				$query = "INSERT INTO `user`(`login_user`, `hash_user`) VALUES ('".$loginVerif."','".$hashVerif."')";
+				$loginVerif = $this->db->quote($user->getLogin());
+				$hashVerif = $this->db->quote($user->getHash());
+				$query = "INSERT INTO `user`(`login_user`, `hash_user`) VALUES (".$loginVerif.",".$hashVerif.")";
 				
 				$res = mysqli_query($this->db, $query);
+				$res = $this->db->exec($query);
 				if ($res)
 				{
 					header('Location: message');
@@ -170,10 +171,10 @@ class UserManager
 	public function getAll()
  	{
  		$query = "SELECT * FROM user";
- 		$res = mysqli_query($this->db, $query);
+ 		$res = $this->db->query($query);
  		try
 		{
- 			while ( $user = mysqli_fetch_object($res, "User") )
+ 			while ( $user = $res->fetchObject('User'))
 				$users [] = $user;
 			return $users;
 		}
