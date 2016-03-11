@@ -3,9 +3,13 @@
 	    <h3 class="modal-title" id="modal-label-register">Messages</h3>
 	</div>
 	<div class="jumbotron">
-		<form method="POST">
-			<?php require('MODULE/MESSAGE/APPS/listeMessage.php'); ?>
-			<?php require('MODULE/MESSAGE/APPS/createMessage.php'); ?>
+		<form method="POST" class="js_form">
+			<div class="js_list">
+				<?php require('MODULE/MESSAGE/APPS/listeMessage.php'); ?>
+			</div>
+			<div >
+				<?php require('MODULE/MESSAGE/APPS/createMessage.php'); ?>
+			</div>
 		</form>
 	</div>
 </div>

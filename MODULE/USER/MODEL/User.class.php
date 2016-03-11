@@ -8,6 +8,7 @@ class User {
 	private $login_user;
 	private $hash_user;
 	private $create_user;
+	private $update_user;
 	private $isAdmin_user;
 	
 /********************************************************************************************
@@ -37,8 +38,11 @@ class User {
 		return $this->create_user;
 	}
 
-	public function isAdmin() 
-	{
+	public function getUpdate() {
+		return $this->update_user;
+	}
+
+	public function isAdmin() { // Un getter d'un booleen transforme le get en is
 		return $this->isAdmin_user;
 	} 
 
@@ -62,8 +66,16 @@ class User {
 		if ($admin === true || $admin === false) 
 		{
 			$this->isAdmin_user = $admin;
-		} else {
+		} 
+		else 
+		{
 			throw new Exception("Admin incorrect (doit être égal à true ou false)");
+		}
+	}
+
+	public function setUpdate($date) {
+		if ($date > time() ) {
+			$this->update_user = $date;
 		}
 	}
 

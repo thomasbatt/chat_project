@@ -1,5 +1,10 @@
 <?php
 
+// var_dump($_GET);
+// var_dump($_POST);
+// var_dump($_SESSION);
+// exit;
+
 spl_autoload_register(function($class)
 {
     $accessClass = [
@@ -13,10 +18,6 @@ spl_autoload_register(function($class)
 
 session_start();
 
-var_dump($_POST);
-// var_dump($_GET);
-var_dump($_SESSION);
-
 $page = 'home';
 
 require('APPS/listeErrors.php');
@@ -24,6 +25,7 @@ require('config.php');
 
 try
 {
+
     // $bdd = new PDO('mysql:dbname='.$config['bdd'].';host='.$config['host'].'', ''.$config['login'].'', ''.$config['password'].'');
     $bdd = new PDO('mysql:dbname=tchat_object;host=192.168.1.7', 'root', 'troiswa');
 }
@@ -32,35 +34,42 @@ catch (PDOException $e)
     $error = 'Erreur interne';
 }
 
-$access = ['home'];
-$accessConnecter = ['message', 'profil'];
+if (isset($_SESSION['id']))
+{
+	$page = 'home';
+	$access = ['home' , 'message', 'profil' ];
+	$ajax = [
+		'listeMessage'=>'MODULE/MESSAGE/APPS/listeMessage.php',
+		'footer'=>'APPS/footer.php'
+	];
+}
+else
+{
+	$page = 'home';
+	$access = ['home'];
+	$ajax = [];
+}
 if (isset($_GET['page']))
 {
-	if (in_array($_GET['page'], $access)) 
-	{
+	if (in_array($_GET['page'], $access ))
 		$page = $_GET['page'];
-	} 
-	elseif (isset($_SESSION['id'])) 
-	{
-		if (in_array($_GET['page'], $accessConnecter)) 
-		{
-		$page = $_GET['page'];
-		}
+	elseif (isset($ajax[$_GET['page']])) {
+		$page = $ajax[$_GET['page']];
 	}
 	else
 	{
-		header('Location: home');
+		header('Location: '.$page);
 		exit;
 	}
 }
 
-$traitement_action = array(
+$traitement_action = [
 	'register' => 'User',
 	'login' => 'User',
 	'logout' => 'User',
 	'information' => 'User',
 	'create_message' => 'Message',
-);
+];
 
 if (isset($_POST['action'])) 
 {
@@ -71,5 +80,19 @@ if (isset($_POST['action']))
 		require('APPS/traitement'.$value.'.php');
 	}
 }
-require('APPS/skel.php');
+
+if (!isset($_GET['ajax']))
+	require('APPS/skel.php');
+else
+	require($page);
+	// if (in_array($_GET['page'], $ajax ))
+	// {
+	// 	$page = $_GET['page'];
+
+	// 	$accessAjax = [
+ //    		'listeMessage' => 'MODULE/MESSAGE/APPS/'.$page.'.php',
+ //    		'footer' => 'APPS/'.$page.'.php',
+ //    	];
+ //    	require($accessAjax[$page]);
+ //    }
 ?>

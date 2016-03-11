@@ -13,11 +13,13 @@ class MessageManager
 	public function getById($Id)
 	{
 		$Id = intval($Id);
+
 		$query = "SELECT * FROM message WHERE Id_message='".$Id."'";
 		$res = $this->db->query($query);
 		if ($res)
 		{
 			$message = $res->fetchObject('Message', [$this->db]);
+
 			if ($message)
 				return $message;
 			else
@@ -43,17 +45,35 @@ class MessageManager
 		}
 		catch (Exception $e)
 		{
-			throw new Exception("Erreur interne");
+			$errorinput = $e; 	
+		}
+		if( !isset($errorinput) )
+		{
+			$IdUser = intval($message->getUser()->getId());
+			$content = $this->db->quote($message->getContent());
+			// var_dump($message);
+			$query = "INSERT INTO message (idUser_message, content_message) VALUES('".$IdUser."',".$content.")";
+			// var_dump($query);
+			// exit;
+			try
+			{
+				$res = $this->db->exec($query);
+			}
+			catch (Exception $e)
+			{
+				throw new Exception("Erreur interne");
+			}
 		}
 	}
 
- 	public function getAll()
+ 	public function getAll($limit)
  	{
- 		$query = "SELECT * FROM message";
+ 		$limit = intval($limit);
+ 		$query = "SELECT * FROM message ORDER BY create_message DESC LIMIT $limit ";
  		$res = $this->db->query($query);
  		try
 		{
- 			while ($message = $res->fetchObject('Message', [$this->db]))
+ 			while ( $message = $res->fetchObject("Message", [$this->db]) )
 				$messages [] = $message;
 			return $messages;
 		}

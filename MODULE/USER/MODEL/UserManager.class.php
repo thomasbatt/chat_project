@@ -12,7 +12,7 @@ class UserManager
 
 /******************************** CONSTRUCTOR ***********************************************
 ********************************************************************************************/
-	public function __construct($bdd)
+	public function __construct(PDO $db)
 	{
 		$this->db = $bdd;
 	}
@@ -170,11 +170,11 @@ class UserManager
 ********************************************************************************************/
 	public function getAll()
  	{
- 		$query = "SELECT * FROM user";
+ 		$query = "SELECT * FROM user ORDER BY update_user DESC, login_user ASC";
  		$res = $this->db->query($query);
  		try
 		{
- 			while ( $user = $res->fetchObject('User'))
+ 			while ( $user = $res->fetchObject("User") )
 				$users [] = $user;
 			return $users;
 		}
@@ -182,6 +182,25 @@ class UserManager
 		{
 			throw new Exception("Erreur interne");
 		}
+ 	}
+
+ 	public function isConnected($id)
+ 	{
+ 		$idVerif = intval($id);
+ 		$query = "SELECT login_user FROM user WHERE update_user > CURRENT_TIMESTAMP - 10 AND id_user = '".$idVerif."'";
+ 		$res = $this->db->query($query);
+ 		$count = $res->rowCount();
+ 		if ($count == 0) 
+ 			return FALSE;
+ 		else
+ 			return TRUE;
+ 	}
+
+ 	public function editDateConnected($id)
+ 	{
+ 		$time = time();
+ 		$query = "UPDATE user SET update_user=CURRENT_TIMESTAMP WHERE id_user = '".$id."'";
+ 		$res = $this->db->exec($query);
  	}
 }
 ?>
