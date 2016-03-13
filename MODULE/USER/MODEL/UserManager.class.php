@@ -49,9 +49,11 @@ class UserManager
 		$user = new User();
 		$user->setLogin($login);
 		$user->initPassword($pass1, $pass2);
+		$user->setColor("#".dechex(rand(0,255)) . dechex(rand(0,255)) . dechex(rand(0,255)) );
 		$login = $this->db->quote($user->getLogin());
 		$hash = $this->db->quote($user->getHash());
-		$query = "INSERT INTO user (login_user, hash_user) VALUES(".$login.",".$hash.")";
+		$color = $this->db->quote($user->getColor());
+		$query = "INSERT INTO user (login_user, hash_user, color_user) VALUES(".$login.",".$hash.",".$color.")";
 		try
 		{
 			$res = $this->db->exec($query);
@@ -83,7 +85,7 @@ class UserManager
  	{
  		$idVerif = intval($id);
  		$query = "SELECT login_user FROM user 
- 					WHERE update_user > CURRENT_TIMESTAMP - 10 AND id_user = '".$idVerif."'";
+ 					WHERE update_user > CURRENT_TIMESTAMP - 5 AND id_user = '".$idVerif."'";
  		$res = $this->db->query($query);
  		$count = $res->rowCount();
  		if ($count == 0) 

@@ -1,6 +1,6 @@
 <div class="wrapper-message">
 	<div class="left">
-		<div class="name-message">
+		<div class="name-message" style="color:<?=htmlentities($message->getUser()->getColor())?>">
 			<?=htmlentities($message->getUser()->getLogin())?>
 		</div>
 		<div>

@@ -7,6 +7,7 @@ class User
 	private $id_user;
 	private $login_user;
 	private $hash_user;
+	private $color_user;
 	private $create_user;
 	private $update_user;
 	private $isAdmin_user;
@@ -28,6 +29,11 @@ class User
 		return $this->hash_user;
 	}
 
+	public function getColor()
+	{
+		return $this->color_user;
+	}
+
 	public function getCreateDate() {
 		return $this->create_user;
 	}
@@ -44,6 +50,12 @@ class User
 	public function setLogin($login) {
 		if (strlen($login) > 3 && strlen($login) < 31) {
 			$this->login_user = $login;
+		}
+	}
+
+	public function setColor($color) {
+		if (strlen($color) == 7) {
+			$this->color_user = $color;
 		}
 	}
 

@@ -169,6 +169,7 @@ li .login-list a, li .login-list span{
   font-size: 11px;
   padding-bottom: 2px;
   text-transform: capitalize;
+  font-weight: 1000;
 }
 
 .heure-message{
