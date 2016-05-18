@@ -131,6 +131,18 @@ a:focus, a:hover {
   font-weight: 700;
 }
 
+.js_list a {
+    color: #333;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.js_list a:focus, a:hover {
+    color: #616161;
+    text-decoration: none;
+    font-weight: 500;
+}
+
 .login-list{
   text-transform: capitalize;    
 }
@@ -175,6 +187,10 @@ li .login-list a, li .login-list span{
 .heure-message{
   /*margin-top: 5px;*/
   font-size: 9px;
+}
+
+.modal-header{
+  border-bottom: none;
 }
 /*
 
