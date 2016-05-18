@@ -37,7 +37,7 @@ class Message
 	public function getContentLinkHtmlentities(){
 		$link = eregi_replace(
 			"( http|mailto|news|ftp|https)://(([-éa-z0-9\/\.\?_=@:~])*)",
-			"<a href=\"\\1://\\2\">\\1://\\2</a>",
+			"<a onclick=\"window.open(this.href); return false;\" href=\"\\1://\\2\">\\1://\\2</a>",
 		    " ".str_replace("&", "é", htmlentities($this->content_message) )
 		);
 		$link = strtr ($link, array_flip ( get_html_translation_table(HTML_ENTITIES) ) );
