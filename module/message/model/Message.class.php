@@ -34,7 +34,7 @@ class Message
 		return $this->user;
 	}
 
-	public function getContentLinkHtmlentities($lg_max){
+	public function getContentLinkHtmlentities(){
 		// return $this->content_message;
 
 		$link = eregi_replace(
@@ -44,12 +44,6 @@ class Message
 		);
 		$link = strtr ($link, array_flip ( get_html_translation_table(HTML_ENTITIES) ) );
 
-		if (strlen($link) > $lg_max)
-		{
-			$link = substr($link, 0, $lg_max);
-			$last_space = strrpos($link, " ");
-			$link = substr($link, 0, $last_space)."...";
-		} 
 		return $link;
 	}
 
