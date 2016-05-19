@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 // var_dump($_GET);
 // var_dump($_POST);
@@ -16,7 +17,6 @@ spl_autoload_register(function($class)
     require($accessClass[$class]);
 });
 
-session_start();
 
 
 require('apps/listeErrors.php');
@@ -68,6 +68,7 @@ $traitement_action = [
 	'logout' => 'User',
 	'information' => 'User',
 	'create_message' => 'Message',
+	'more_message' => 'Message',
 ];
 
 if (isset($_POST['action'])) 

@@ -1,6 +1,10 @@
 <?php
+$limit = 10;
+if ( isset( $_SESSION['limit'] ))
+	$limit = $_SESSION['limit'];
+
 $MessageManager = new MessageManager($db);
-$messages = $MessageManager->getAll(10);
+$messages = $MessageManager->getAll($limit);
 $count = sizeof($messages)-1;
 while ( isset($messages[$count]) )
 {

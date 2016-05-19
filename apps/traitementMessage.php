@@ -34,6 +34,12 @@ if (isset($_POST['action']))
 			}
 		}
 	}
+	else if ($action == 'more_message')
+	{
+		$_SESSION['limit'] = $_SESSION['limit'] + 10;
+		header('Location: messages');
+		exit;
+	}
 	else
 		$error = "Erreur interne (filou détecté !!!)";
 

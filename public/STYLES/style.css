@@ -138,7 +138,7 @@ a:focus, a:hover {
 }
 
 .js_list a:focus, a:hover {
-    color: #616161;
+    color: #000;
     text-decoration: none;
     font-weight: 500;
 }
@@ -155,7 +155,8 @@ li .login-list a, li .login-list span{
   display: inline-block;
 }
 
-.message{
+.wrapper-message{
+  // max-width: 75%;
   /*margin-bottom: 30px;*/
 }
 
@@ -166,6 +167,8 @@ li .login-list a, li .login-list span{
   padding: 5px 15px;
   margin-bottom: 10px;
   font-weight: 500;
+  max-width: 90%;
+  text-align: justify;
 }
 
 .left{
@@ -175,6 +178,8 @@ li .login-list a, li .login-list span{
   padding: 5px 15px;
   margin-bottom: 10px;
   font-weight: 500;
+  max-width: 90%;
+  text-align: justify;
 }
 
 .name-message{
@@ -187,15 +192,18 @@ li .login-list a, li .login-list span{
 .heure-message{
   /*margin-top: 5px;*/
   font-size: 9px;
+  text-align: right;
 }
 
 .modal-header{
   border-bottom: none;
 }
-/*
 
-.message .jumbotron{
+.btn_nue{
+  border: none;
+  background: none;
+  font: 700;
+  font-size: 1.2em;
+  text-align: center;
+  width: 100%;
 }
-
-.message .jumbotron.connected {
-}*/

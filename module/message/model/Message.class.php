@@ -34,13 +34,22 @@ class Message
 		return $this->user;
 	}
 
-	public function getContentLinkHtmlentities(){
+	public function getContentLinkHtmlentities($lg_max){
+		// return $this->content_message;
+
 		$link = eregi_replace(
 			"( http|mailto|news|ftp|https)://(([-éa-z0-9\/\.\?_=@:~])*)",
 			"<a onclick=\"window.open(this.href); return false;\" href=\"\\1://\\2\">\\1://\\2</a>",
 		    " ".str_replace("&", "é", htmlentities($this->content_message) )
 		);
 		$link = strtr ($link, array_flip ( get_html_translation_table(HTML_ENTITIES) ) );
+
+		if (strlen($link) > $lg_max)
+		{
+			$link = substr($link, 0, $lg_max);
+			$last_space = strrpos($link, " ");
+			$link = substr($link, 0, $last_space)."...";
+		} 
 		return $link;
 	}
 

@@ -13,7 +13,7 @@ $('document').ready(function(){
  
     $('.js_form').submit(function(info)
     {
-        info.preventDefault();
+        info.defaultPrevented();
         var message = $('.js_in').val();
         $.post('messages', {content:message,action:"create_message"}, function()
         {
@@ -22,10 +22,19 @@ $('document').ready(function(){
         });
         return false;
     });
+
+    $('.js_more').submit(function()
+    {
+        $.post('messages', {action:"more_message"}, function()
+        {
+            refresh();
+        });
+        return false;
+    });
     
     setInterval(function()
     {
-        // refresh();
+        refresh();
     },5000);
 
     $(window).scroll(function(){
