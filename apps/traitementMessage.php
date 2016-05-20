@@ -24,6 +24,7 @@ if (isset($_POST['action']))
 				$manager = new UserManager($db);
 				$author = $manager->getById($_SESSION['id']);
 				$MessageManager->create($author, $_POST['content']);
+				$_SESSION['limit'] = 10;
 				header('Location: messages');
 				exit;
 			}
