@@ -38,13 +38,4 @@ $config = [
 // 	'bdd' => 'tchat_object',
 // ];
 
-//-------------------- OVH HOME --------------------
-
-// $config = [
-// 	'host' => 'thomasbazpetite2.mysql.db',
-// 	'port' => '3306',
-// 	'login' => 'thomasbazpetite2',
-// 	'password' => 'Janolap10',
-// 	'bdd' => 'thomasbazpetite2',
-// ];
 ?>
