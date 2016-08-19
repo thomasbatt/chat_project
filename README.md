@@ -11,4 +11,4 @@
 
 ### Objectif
 
-*faire un chat en php orienté object en AJAX.*
+*Faire un chat en php orienté object avec AJAX.*
