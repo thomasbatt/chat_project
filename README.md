@@ -6,8 +6,8 @@
 
 ### Contributeurs 
 
-thomasbatt
-swagert
+*thomasbatt*
+*swagert*
 
 ### Objectif
 
