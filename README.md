@@ -2,7 +2,7 @@
 
 *Projet de groupe numero 4 de la formation 3wAcademy realisé en HTML5, CSS3, JavaScript, PHP, Sql*
 
-###[www.tchat.webatt.fr](http://tachat.webatt.fr)
+###[www.tchat.webatt.fr](http://tchat.webatt.fr)
 
 ### Contributeurs 
 
