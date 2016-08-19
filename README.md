@@ -1,19 +1,14 @@
-chat avec Herve
+#TCHAT-COWORKING du Faubourg de Saverne
 
-contributor :
-------------------------------------------------------------------
----------------------------CONTRIBUTOR----------------------------
-------------------------------------------------------------------
+*Projet de groupe numero 4 de la formation 3wAcademy realisé en HTML5, CSS3, JavaScript, PHP, Sql*
+
+###[www.troiswa.webatt.fr/tchat](http://troiswa.webatt.fr/tchat)
+
+### Contributeurs 
 
 thomasbatt
 swagert
 
-------------------------------------------------------------------
-<<<<<<< HEAD
----------------------------PROJET---------------------------------
-=======
----------------------------PROJECT---------------------------------
->>>>>>> b680d8dae7e58e230bf33507f6ec5aa828fedd9a
-------------------------------------------------------------------
+### Objectif
 
-faire un chat tout simple
+*faire un chat en php orienté object en AJAX.*
